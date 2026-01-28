@@ -1,0 +1,5 @@
+flight,passenger_id,hotel_required,is_transit
+EY106,P1,True,True
+EY106,P2,False,False
+EY107,P3,True,False
+EY109,P4,False,True

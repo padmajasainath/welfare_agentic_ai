@@ -1,0 +1,3 @@
+crew_id,crew_role,flight,station,duty_start_utc,duty_end_utc,duty_remaining_minutes,next_flight,is_standby
+C001,PILOT,EY107,AUH,2026-01-15T01:00,2026-01-15T13:00,180,EY207,false
+C006,CABIN,STANDBY,AUH,2026-01-15T04:00,2026-01-15T16:00,480,,true
