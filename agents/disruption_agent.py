@@ -12,23 +12,26 @@ class DisruptionDetectionAgent(BaseAgent):
     def run(self, flight_schedule_path, callback):
         """
         Continuously monitors flight_schedule.csv.
-        Calculates delay as duration (arrival_utc - departure_utc).
+        Calculates delay as duration (actual_departure_utc - schedule_departure_utc).
         Passes ALL current disruptions to the callback.
         """
         while True:
             try:
                 df = pd.read_csv(flight_schedule_path)
-                df['departure_utc'] = pd.to_datetime(df['departure_utc'])
-                df['arrival_utc'] = pd.to_datetime(df['arrival_utc'])
-                df['calculated_delay'] = (df['arrival_utc'] - df['departure_utc']).dt.total_seconds() / 60
+                df['schedule_departure_utc'] = pd.to_datetime(df['schedule_departure_utc'])
+                df['actual_departure_utc'] = pd.to_datetime(df['actual_departure_utc'])
+                df['calculated_delay'] = (df['actual_departure_utc'] - df['schedule_departure_utc']).dt.total_seconds() / 60
 
+                today = datetime.utcnow().date()
+                
                 current_disruptions = []
 
                 for _, row in df.iterrows():
                     flight = row['flight']
                     delay = row['calculated_delay']
+                    flight_date = row['schedule_departure_utc'].date()
 
-                    if delay >= 120:
+                    if flight_date == today and delay >= 15:
                         event = {
                             "flight": flight,
                             "station": row['origin'],

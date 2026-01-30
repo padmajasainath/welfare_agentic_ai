@@ -172,20 +172,37 @@ while True:
                 with ag1:
                     with st.container(border=True):
                         st.markdown('<p style="color:#2E7D32; font-weight:700; font-size:0.9rem; margin-bottom:10px;">👮 CREW IMPACT AGENT</p>', unsafe_allow_html=True)
-                        st.markdown(f'<p style="color:#1A1A1A; font-size:1.1rem; margin-bottom:5px;"><b>{event["crew_risk"]}</b> Conflict Detected</p>', unsafe_allow_html=True)
-                        st.markdown(f'<p style="color:#666; font-size:0.85rem;">Strategy: {event["crew_rec"]}</p>', unsafe_allow_html=True)
+                        st.markdown(f'<p style="color:#1A1A1A; font-size:1.1rem; margin-bottom:10px;"><b>{event["crew_risk"]}</b> Conflict Detected</p>', unsafe_allow_html=True)
+                        with st.expander("🔍 VIEW RECOVERY DETAILS", expanded=False):
+                            st.markdown(event["crew_rec"])
                 with ag2:
                     with st.container(border=True):
                         st.markdown('<p style="color:#01579B; font-weight:700; font-size:0.9rem; margin-bottom:10px;">🏨 WELFARE AGENT</p>', unsafe_allow_html=True)
-                        st.markdown(f'<p style="color:#1A1A1A; font-size:1.1rem; margin-bottom:5px;"><b>{event["welfare"]["hotel_required"]}</b> Hotels | <b>{event["welfare"]["meals_required"]}</b> Meals</p>', unsafe_allow_html=True)
-                        st.markdown('<p style="color:#666; font-size:0.85rem;">Status: Staging Resources</p>', unsafe_allow_html=True)
+                        st.markdown(f'<p style="color:#1A1A1A; font-size:1.1rem; margin-bottom:10px;"><b>{event["welfare"]["total_impacted"]}</b> Guests Impacted</p>', unsafe_allow_html=True)
+                        with st.expander("📊 TACTICAL WELFARE VIEW", expanded=False):
+                            st.markdown(event["welfare"]["welfare_summary"])
+                        st.markdown(f'<p style="color:#666; font-size:0.75rem; margin-top:5px;">Requirement: {event["welfare"]["hotel_required"]} Hotels | {event["welfare"]["meals_required"]} Meals</p>', unsafe_allow_html=True)
 
-                # Feed Sections
-                st.markdown('<p style="color:#8C8C8C; font-size:0.75rem; margin-top:20px; font-weight:700; text-transform:uppercase;">Passenger Broadcast Feed</p>', unsafe_allow_html=True)
+                st.markdown('<p style="color:#8C8C8C; font-size:0.75rem; margin-top:20px; font-weight:700; text-transform:uppercase;">Passenger Proactive Communication</p>', unsafe_allow_html=True)
                 st.info(event['passenger_msg'])
 
-                st.markdown('<p style="color:#B3995D; font-size:0.75rem; margin-top:20px; font-weight:700; text-transform:uppercase;">Management Intervention Strategy</p>', unsafe_allow_html=True)
-                st.success(event['management_insight'])
+                with st.expander("📡 AIRPORT OPS BRIEFING", expanded=False):
+                    st.code(event['ops_msg'], language="text")
+                
+                with st.expander("☎️ CALL-CENTER SUMMARY", expanded=False):
+                    st.markdown(event.get('call_center_msg', "No summary available."))
+
+                with st.expander("📶 WHATSAPP BROADCAST STATUS", expanded=True):
+                    recipients = event.get('recipients', [])
+                    if not recipients:
+                        st.warning("No contact data found for this flight in PNR records.")
+                    else:
+                        for rec in recipients:
+                            st.success(f"✅ DELIVERED: {rec['name']} ({rec['phone']}) - PNR: {rec['pnr']}")
+                        st.caption(f"Broadcast completed for {len(recipients)} guests.")
+
+                with st.expander("📝 MANAGEMENT INTERVENTION STRATEGY", expanded=False):
+                    st.success(event['management_insight'])
 
             # Elegant spacing
             st.markdown('<div style="height:40px;"></div>', unsafe_allow_html=True)

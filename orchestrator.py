@@ -32,6 +32,8 @@ def handle_disruption(disruptions):
             "welfare": welfare,
             "passenger_msg": comm['passenger_message'],
             "ops_msg": comm['ops_message'],
+            "call_center_msg": comm.get('call_center_summary', ""),
+            "recipients": comm.get('recipients', []),
             "management_insight": insight
         }
         current_state.append(event_data)

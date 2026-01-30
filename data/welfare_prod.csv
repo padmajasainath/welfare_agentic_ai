@@ -1,5 +1,5 @@
-flight,passenger_id,hotel_required,is_transit
-EY106,P1,True,True
-EY106,P2,False,False
-EY107,P3,True,False
-EY109,P4,False,True
+flight,passenger_id,hotel_required,meal_required,is_transit,date
+EY109,PAX1,False,True,True,
+EY109,PAX1,False,True,,2026-01-30
+EY107,PAX1,True,True,False,2026-01-30
+EY107,PAX01,True,True,True,2026-01-30
