@@ -21,6 +21,8 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
+      - '--set-env-vars'
+      - 'GOOGLE_API_KEY=$_GOOGLE_API_KEY'
 
 options:
   logging: CLOUD_LOGGING_ONLY
