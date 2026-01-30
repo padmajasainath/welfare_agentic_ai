@@ -1,4 +1,6 @@
 streamlit
 pandas
 google-generativeai
+google-genai
+google-cloud-aiplatform
 python-dotenv
