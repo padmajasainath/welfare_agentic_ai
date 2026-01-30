@@ -24,6 +24,7 @@ steps:
 
 options:
   logging: CLOUD_LOGGING_ONLY
+  logStreamingOption: STREAM_ON
 
 images:
   - 'gcr.io/$PROJECT_ID/welfare-agentic-ai'
