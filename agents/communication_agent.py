@@ -6,10 +6,6 @@ from agents.base_agent import BaseAgent
 class CommunicationAgent(BaseAgent):
     def __init__(self):
         super().__init__("CommunicationAgent")
-        # Initialize Gemini 2.0 Flash
-        self.api_key = "AIzaSyBKASLtfLXEQXNvkkcAM_XYIDw8pN5_Teo"
-        self.client = genai.Client(api_key=self.api_key)
-        self.model_id = "gemini-2.0-flash"
 
     def run(self, disruption, crew, welfare):
         """

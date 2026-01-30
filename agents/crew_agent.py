@@ -6,11 +6,6 @@ from agents.base_agent import BaseAgent
 class CrewImpactAgent(BaseAgent):
     def __init__(self):
         super().__init__("CrewImpactAgent")
-        # Initialize the new Google GenAI SDK
-        self.api_key = "AIzaSyBKASLtfLXEQXNvkkcAM_XYIDw8pN5_Teo"
-        self.client = genai.Client(api_key=self.api_key)
-        # Using gemini-2.0-flash as accessible by this key
-        self.model_id = "gemini-2.0-flash"
 
     def run(self, disruption_event):
         """
