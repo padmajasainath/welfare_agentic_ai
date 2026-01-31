@@ -119,7 +119,7 @@ if 'orchestrator_started' not in st.session_state:
 st.markdown('<div style="margin-bottom: 50px; padding: 20px 0;">', unsafe_allow_html=True)
 c_logo, c_title = st.columns([1, 4])
 with c_logo:
-    st.image("https://www.etihad.com/content/dam/eag/etihadairways/etihadcom/Global/logo/header/header-text-image-web.svg%22, width=180)
+    st.image("https://www.etihad.com/content/dam/eag/etihadairways/etihadcom/Global/logo/header/header-text-image-web.svg, width=180)
 with c_title:
     st.markdown('<h1 style="color: #1A1A1A; margin: 0; font-size: 3rem; font-weight: 600;">AERIS <span style="color: #B3995D; font-weight: 300;">LIVE PULSE</span></h1>', unsafe_allow_html=True)
     st.markdown('<p style="color: #666; font-size: 1.1rem; letter-spacing: 2px; margin-top: -10px;">ETIHAD INTELLIGENT OPERATIONS COMMAND</p>', unsafe_allow_html=True)
@@ -127,7 +127,7 @@ st.markdown('</div>', unsafe_allow_html=True)
  
 with st.sidebar:
     # Etihad Branding & Status
-    st.image("https://www.etihad.com/content/dam/eag/etihadairways/etihadcom/Global/logo/header/header-text-image-web.svg%22, use_container_width=True)
+    st.image("https://www.etihad.com/content/dam/eag/etihadairways/etihadcom/Global/logo/header/header-text-image-web.svg, use_container_width=True)
     st.markdown('<div style="background: #FAF9F6; border: 1px solid #B3995D; color: #B3995D; padding: 10px; border-radius: 8px; text-align: center; font-weight: 600; letter-spacing: 2px; font-size: 0.8rem; margin-top: 10px;">AERIS ACTIVE</div>', unsafe_allow_html=True)
    
     st.markdown("---")
