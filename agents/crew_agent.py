@@ -80,10 +80,8 @@ class CrewImpactAgent(BaseAgent):
 
         try:
             # Use the new SDK's generate_content
-            response = self.client.models.generate_content(
-                model=self.model_id,
-                contents=prompt
-            )
+            model = genai.GenerativeModel(self.model_id)
+            response = model.generate_content(prompt)
             recommendation = response.text.strip()
             # Clean up potential markdown if AI adds it
             if recommendation.startswith('"') and recommendation.endswith('"'):
