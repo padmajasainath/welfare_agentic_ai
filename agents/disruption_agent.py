@@ -47,19 +47,18 @@ class DisruptionDetectionAgent(BaseAgent):
                         }
                         current_disruptions.append(event)
  
-                # Only trigger update if the disruption state has changed
-                if current_disruptions != self.last_disruptions:
+                # Compare only essential data (ignoring unique timestamps)
+                def get_fp(dl): return [(d['flight'], round(d['delay_minutes'], 1)) for d in dl]
+               
+                if get_fp(current_disruptions) != get_fp(self.last_disruptions):
                     # Pass the full list of active disruptions to the orchestrator
                     callback(current_disruptions)
                     self.last_disruptions = current_disruptions
                 else:
-                    # Optional: Print heartbeat but no action
-                    # print("No change in disruption state.", flush=True)
+                    # No meaningful change in data, skipping orchestrator call
                     pass
  
             except Exception as e:
                 print(f"Error reading or processing schedule: {e}")
  
             time.sleep(self.poll_interval)
- 
- 
