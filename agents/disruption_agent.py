@@ -17,7 +17,9 @@ class DisruptionDetectionAgent(BaseAgent):
         """
         while True:
             try:
-                df = pd.read_csv(flight_schedule_path)
+                # Disable caching to always get fresh data from GCS
+                storage_options = {'cache_type': 'none'} if flight_schedule_path.startswith('gs://') else None
+                df = pd.read_csv(flight_schedule_path, storage_options=storage_options)
                 df['schedule_departure_utc'] = pd.to_datetime(df['schedule_departure_utc'])
                 df['actual_departure_utc'] = pd.to_datetime(df['actual_departure_utc'])
                 df['calculated_delay'] = (df['actual_departure_utc'] - df['schedule_departure_utc']).dt.total_seconds() / 60
