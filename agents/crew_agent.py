@@ -14,8 +14,9 @@ class CrewImpactAgent(BaseAgent):
         2. LLM reasoning (Gemini 2.0) for ops-grade recommendations
         """
         # Step 1: Rule-based computation (Deterministic)
+        BUCKET = "welfare-agentic-ai-data-bucket"
         try:
-            crew_df = pd.read_csv("data/crew_assignments.csv")
+            crew_df = pd.read_csv(f"gs://{BUCKET}/data/crew_assignments.csv")
             crew_df['duty_start_utc'] = pd.to_datetime(crew_df['duty_start_utc'])
         except Exception as e:
             return {

@@ -15,7 +15,8 @@ class WelfareAgent(BaseAgent):
         """
         # 1. Read PNR data
         try:
-            pnr_df = pd.read_csv("data/pnr_data.csv")
+            BUCKET = "welfare-agentic-ai-data-bucket"
+            pnr_df = pd.read_csv(f"gs://{BUCKET}/data/pnr_data.csv")
             pnr_df['DepartureDateUTC'] = pd.to_datetime(pnr_df['DepartureDateUTC'])
         except Exception as e:
             print(f"Error reading PNR data: {e}")
@@ -95,12 +96,12 @@ class WelfareAgent(BaseAgent):
             new_welfare['date'] = today.isoformat()
             
             try:
-                existing_df = pd.read_csv("data/welfare_prod.csv")
+                existing_df = pd.read_csv(f"gs://{BUCKET}/data/welfare_prod.csv")
                 combined_df = pd.concat([existing_df, new_welfare], ignore_index=True)
                 combined_df.drop_duplicates(subset=['flight', 'passenger_id', 'date'], keep='last', inplace=True)
             except FileNotFoundError:
                 combined_df = new_welfare
-            combined_df.to_csv("data/welfare_prod.csv", index=False)
+            combined_df.to_csv(f"gs://{BUCKET}/data/welfare_prod.csv", index=False)
 
         return {
             "total_impacted": total_pax,

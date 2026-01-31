@@ -130,7 +130,7 @@ with st.sidebar:
     st.markdown('<div style="background: #E8F5E9; color: #2E7D32; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600;">PULSE ACTIVE</div>', unsafe_allow_html=True)
     st.markdown("---")
     st.markdown('<p style="color: #666; font-size: 0.8rem; font-weight:600;">MONITORING FILE</p>', unsafe_allow_html=True)
-    st.code("flight_schedule.csv", language="text")
+    st.code("gs://welfare-agentic-ai-data-bucket/data/flight_schedule.csv", language="text")
     if st.button("RESET INTELLIGENCE FEED"):
         event_store.set_active_events([])
 

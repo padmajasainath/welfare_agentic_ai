@@ -49,7 +49,8 @@ def handle_disruption(disruptions):
 def start_orchestrator():
     # Start the background detection
     disruption_agent = DisruptionDetectionAgent(poll_interval=2)
-    disruption_agent.run("data/flight_schedule.csv", handle_disruption)
+    BUCKET = "welfare-agentic-ai-data-bucket"
+    disruption_agent.run(f"gs://{BUCKET}/data/flight_schedule.csv", handle_disruption)
 
 if __name__ == "__main__":
     start_orchestrator()

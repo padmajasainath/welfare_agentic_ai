@@ -14,7 +14,8 @@ class CommunicationAgent(BaseAgent):
         # 1. Fetch Contact Data from PNR
         recipients = []
         try:
-            pnr_df = pd.read_csv("data/pnr_data.csv")
+            BUCKET = "welfare-agentic-ai-data-bucket"
+            pnr_df = pd.read_csv(f"gs://{BUCKET}/data/pnr_data.csv")
             pnr_df['DepartureDateUTC'] = pd.to_datetime(pnr_df['DepartureDateUTC'])
             
             flight_id = disruption['flight']
