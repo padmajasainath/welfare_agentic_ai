@@ -2,6 +2,7 @@ import streamlit as st
 import event_store
 import threading
 import time
+from datetime import datetime
 from orchestrator import start_orchestrator
 
 # Page Config
@@ -128,6 +129,11 @@ st.markdown('</div>', unsafe_allow_html=True)
 with st.sidebar:
     st.markdown('<p class="sidebar-title">🛰️ SYSTEM CONTROL</p>', unsafe_allow_html=True)
     st.markdown('<div style="background: #E8F5E9; color: #2E7D32; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600;">PULSE ACTIVE</div>', unsafe_allow_html=True)
+    
+    st.markdown("---")
+    st.markdown(f'<p style="color: #666; font-size: 0.8rem; font-weight:600;">SERVER DATE (UTC)</p>', unsafe_allow_html=True)
+    st.markdown(f'<p style="font-size: 1.1rem; font-weight: 400; color: #1A1A1A;">{datetime.utcnow().date()}</p>', unsafe_allow_html=True)
+
     st.markdown("---")
     st.markdown('<p style="color: #666; font-size: 0.8rem; font-weight:600;">MONITORING FILE</p>', unsafe_allow_html=True)
     st.code("gs://welfare-agentic-ai-data-bucket/data/flight_schedule.csv", language="text")
