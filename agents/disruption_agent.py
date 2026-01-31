@@ -30,6 +30,9 @@ class DisruptionDetectionAgent(BaseAgent):
                     flight = row['flight']
                     delay = row['calculated_delay']
                     flight_date = row['schedule_departure_utc'].date()
+                    
+                    # DEBUG PRINTS
+                    print(f"DEBUG: Checking flight {flight} | Date: {flight_date} (Today: {today}) | Delay: {delay}")
 
                     if flight_date == today and delay >= 15:
                         event = {
